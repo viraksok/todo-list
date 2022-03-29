@@ -1,0 +1,26 @@
+.input_padding {
+  padding: 0.5rem 1rem;
+}
+
+.textInline {
+  display: inline-flex;
+}
+
+.button {
+  margin-left: 0.25rem;
+}
+
+.text_strike {
+  text-decoration: line-through;
+}
+
+.text_none_strike {
+  text-decoration: none !important;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
