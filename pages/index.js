@@ -43,6 +43,10 @@ export default function Home() {
     }
   };
 
+  function checkexsiting(list, value) {
+    return false;
+  }
+
   const onClickEdit = (el) => {
     setIsEdit(true);
     setTodo(el.todo);
