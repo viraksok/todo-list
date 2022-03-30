@@ -10,6 +10,16 @@ export default function Home() {
   const [isEditIndex, setIsEditIndex] = useState(0);
   const [filteredTodo, setFilteredTodo] = useState([]);
 
+  const fetchData = async () => {
+    const response = await fetch('/api/todo');
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const todo_list = await response.json();
+    return setTodolist(...todo_list);
+  };
+
   const addToList = (event) => {
     /*If key press enter*/
     if (event.key == 'Enter') {
@@ -42,10 +52,6 @@ export default function Home() {
       }
     }
   };
-
-  function checkexsiting(list, value) {
-    return false;
-  }
 
   const onClickEdit = (el) => {
     setIsEdit(true);
