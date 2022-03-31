@@ -18,6 +18,7 @@ export default function Home() {
     }
     const todo_list = await response.json();
     if (isLoad) {
+      setIsload(false);
       return setTodolist(todo_list);
     } else {
       return [];
@@ -27,7 +28,6 @@ export default function Home() {
 
   const addToList = (event) => {
     /*If key press enter*/
-    setIsload(false);
     if (event.key == 'Enter') {
       /*Validate input if it's empty*/
       if (todo !== '') {
