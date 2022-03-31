@@ -15,7 +15,7 @@ export default function Home() {
   const fetchData = async () => {
     await fetch('/api/todo')
       .then((response) => response.json())
-      .then((data) => IsGetData(data));
+      .then((data) => setTodolist(data));
     if (isLoad) {
       alert('Load');
       setIsload(false);
@@ -65,7 +65,7 @@ export default function Home() {
           const requestPut = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(todolist[isEditIndex]),
+            body: JSON.stringify(todolist),
           };
           fetch('/api/todo', requestPut)
             .then((response) => response.json())
@@ -109,6 +109,14 @@ export default function Home() {
         : { ...taskTodolist };
     });
     setTodolist([...strikelist]);
+    const requestStrike = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(strikelist),
+    };
+    fetch('/api/todo', requestStrike)
+      .then((response) => response.json())
+      .then((data) => setTodolist(data));
   };
 
   useEffect(() => {
