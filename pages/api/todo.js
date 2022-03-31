@@ -20,6 +20,8 @@ export default async function handler(request, response) {
     },
   ];
 
+  const url = `https://todo-32f64-default-rtdb.asia-southeast1.firebasedatabase.app/todo.json`;
+
   switch (request.method) {
     case 'POST':
       console.log(request);
@@ -28,21 +30,16 @@ export default async function handler(request, response) {
       const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: request.body,
+        body: JSON.stringify(request.body),
       };
-      let updatelist = await fetch(
-        `https://todo-32f64-default-rtdb.asia-southeast1.firebasedatabase.app/todo.json`,
-        requestOptions
-      );
-      console.log(updatelist);
+      let updatelist = await fetch(url, requestOptions);
+      console.log(requestOptions);
       return response.status(200).json('Success');
     case 'DELETE':
       console.log(response);
       return response.status(200).json();
     default:
-      let todolist = await fetch(
-        `https://todo-32f64-default-rtdb.asia-southeast1.firebasedatabase.app/todo.json`
-      );
+      let todolist = await fetch(url);
       return response.status(200).json(await todolist.json());
   }
 }

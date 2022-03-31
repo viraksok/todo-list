@@ -40,7 +40,7 @@ export default function Home() {
               id: todolist.length + 1,
               todo: todo,
               isCompleted: false,
-              todolist,
+              createAt: Date(),
             });
 
             setTodolist(todolist);
