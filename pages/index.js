@@ -12,6 +12,7 @@ export default function Home() {
   const [isLoad, setIsload] = useState(true);
   const [getData, setGetData] = useState([]);
 
+  /*function load data*/
   const fetchData = () => {
     fetch('/api/todo')
       .then((response) => response.json())
@@ -29,6 +30,7 @@ export default function Home() {
     fetchData();
   }, []);
 
+  /*on key enter click*/
   const addToList = (event) => {
     /*If key press enter*/
     if (event.key == 'Enter') {
@@ -77,6 +79,7 @@ export default function Home() {
     }
   };
 
+  /*on button edit click*/
   const onClickEdit = (el) => {
     setIsEdit(true);
     setTodo(el.todo);
@@ -84,6 +87,7 @@ export default function Home() {
     setIsEditIndex(editIndex);
   };
 
+  /*on button remove click*/
   const onClickRemove = (el) => {
     let removelist = todolist.filter((r) => r.id != el.id);
     setTodolist([...removelist]);
