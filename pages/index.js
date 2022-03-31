@@ -20,6 +20,7 @@ export default function Home() {
     const todo_list = await response.json();
     return setDatatodo(todo_list);
   };
+
   fetchData();
 
   const addToList = (event) => {
