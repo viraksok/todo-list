@@ -20,6 +20,9 @@ export default function Home() {
     return setTodolist(todo_list);
   };
 
+  document.addEventListener('load', (event) => {
+    fetchData();
+  });
   const addToList = (event) => {
     /*If key press enter*/
     if (event.key == 'Enter') {
@@ -32,7 +35,6 @@ export default function Home() {
               todo: todo,
               isCompleted: false,
             });
-
             setTodolist(todolist);
             setTodo('');
           } else {
@@ -82,9 +84,8 @@ export default function Home() {
       )
     );
   }, [todo, todolist]);
-
   return (
-    <div onLoad={fetchData()}>
+    <div>
       <h1>Todo List</h1>
       <input
         className={styles.input_padding}
