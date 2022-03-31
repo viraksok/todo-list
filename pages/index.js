@@ -18,8 +18,7 @@ export default function Home() {
       .then((data) => setTodolist(data));
     if (isLoad) {
       setIsload(false);
-      setTodolist(getData);
-      return setFilteredTodo(getData);
+      return setFilteredTodo(todolist);
     } else {
       return [];
     }
