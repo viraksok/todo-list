@@ -15,10 +15,11 @@ export default function Home() {
   const fetchData = async () => {
     await fetch('/api/todo')
       .then((response) => response.json())
-      .then((data) => setTodolist(data));
+      .then((data) => IsGetData(data))
+      .catch();
     if (isLoad) {
       setIsload(false);
-      return setFilteredTodo(todolist);
+      return setFilteredTodo(getData);
     } else {
       return [];
     }

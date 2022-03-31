@@ -2,19 +2,19 @@ export default async function handler(request, response) {
   const url = `https://todo-32f64-default-rtdb.asia-southeast1.firebasedatabase.app/todo`;
   const data = [
     {
-      id: '1',
+      id: '0',
       todo: 'Next JS',
       isCompleted: false,
       createdAt: Date(),
     },
     {
-      id: '2',
+      id: '1',
       todo: 'React JS',
       isCompleted: false,
       createdAt: Date(),
     },
     {
-      id: '3',
+      id: '2',
       todo: 'Vue JS',
       isCompleted: false,
       createdAt: Date(),
