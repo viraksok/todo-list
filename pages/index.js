@@ -3,6 +3,16 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import TodoActionHandlers from './todoactionhandlers';
 
+const fetchData = async () => {
+  const response = await fetch('api/todo');
+
+  if (!response.ok) {
+    throw new Error(`Error: ${response.status}`);
+  }
+  const todo_list = await response.json();
+  return setTodolist(todo_list);
+};
+
 export default function Home() {
   const [todo, setTodo] = useState('');
   const [todolist, setTodolist] = useState([]);
@@ -10,16 +20,6 @@ export default function Home() {
   const [isEditIndex, setIsEditIndex] = useState(0);
   const [filteredTodo, setFilteredTodo] = useState([]);
   const [datatodo, setDatatodo] = useState([]);
-
-  const fetchData = async () => {
-    const response = await fetch('api/todo');
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    const todo_list = await response.json();
-    return setTodolist(todo_list);
-  };
   fetchData();
 
   const addToList = (event) => {
