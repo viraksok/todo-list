@@ -11,7 +11,7 @@ export default function Home() {
   const [filteredTodo, setFilteredTodo] = useState([]);
   const [datatodo, setDatatodo] = useState([]);
 
-  const fetchData = async () => {
+  async () => {
     const response = await fetch('/api/todo');
 
     if (!response.ok) {
@@ -20,8 +20,6 @@ export default function Home() {
     const todo_list = await response.json();
     return setDatatodo(todo_list);
   };
-
-  fetchData();
 
   const addToList = (event) => {
     /*If key press enter*/
