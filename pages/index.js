@@ -17,6 +17,7 @@ export default function Home() {
       .then((response) => response.json())
       .then((data) => IsGetData(data));
     if (isLoad) {
+      alert('Load');
       setIsload(false);
       setTodolist(getData);
       return setFilteredTodo(getData);
@@ -93,7 +94,7 @@ export default function Home() {
     };
     fetch('/api/todo', requestDelete)
       .then((response) => response.json())
-      .then((data) => setTodolist(...data));
+      .then((data) => setTodolist(data));
   };
 
   /*on button complete click*/

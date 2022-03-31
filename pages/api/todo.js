@@ -36,11 +36,7 @@ export default async function handler(request, response) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(request.body),
       };
-      let updatelist = await fetch(
-        url + '/' + request.body + '.json',
-        requestUpdate
-      );
-      console.log(url + '/' + request.body + '.json');
+      let updatelist = await fetch(url + '.json', requestUpdate);
       return response.status(200).json('Success');
     case 'DELETE':
       const requestDelete = {
