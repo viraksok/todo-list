@@ -12,7 +12,7 @@ export default function Home() {
   const [isLoad, setIsload] = useState(true);
 
   const fetchData = async () => {
-    const response = await fetch('api/todo');
+    const response = await fetch('/api/todo');
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
@@ -35,18 +35,19 @@ export default function Home() {
       /*Validate input if it's empty*/
       if (todo !== '') {
         if (!isEdit) {
-          if (!todolist.some((el) => el.todo == todo)) {
+          if (
+            !todolist.some((el) => el.todo.toLowerCase() == todo.toLowerCase())
+          ) {
             todolist.push({
-              id: todolist.length + 1,
+              id: todolist.length,
               todo: todo,
               isCompleted: false,
               createAt: Date(),
             });
-
             setTodolist(todolist);
             setTodo('');
             const requestOptions = {
-              method: 'PUT',
+              method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(todolist),
             };
@@ -60,6 +61,15 @@ export default function Home() {
           setIsEdit(false);
           todolist[isEditIndex].todo = todo;
           setTodo('');
+
+          const requestPutOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(todolist),
+          };
+          fetch('/api/todo', requestPutOptions)
+            .then((response) => response.json())
+            .then((data) => setTodolist(data));
         }
       } else {
         alert('Please insert some text!');
@@ -75,8 +85,16 @@ export default function Home() {
   };
 
   const onClickRemove = (el) => {
-    let removelist = todolist.filter((r) => r.id != el.id);
-    setTodolist([...removelist]);
+    //let removelist = todolist.filter((r) => r.id != el.id);
+    // setTodolist([...removelist]);
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: el.id,
+    };
+    fetch('/api/todo', requestOptions)
+      .then((response) => response.json())
+      .then((data) => setTodolist(data));
   };
 
   /*on button complete click*/
