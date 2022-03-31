@@ -17,12 +17,9 @@ export default function Home() {
       throw new Error(`Error: ${response.status}`);
     }
     const todo_list = await response.json();
-    return setTodolist(todo_list);
+    return todo_list;
   };
 
-  document.addEventListener('load', (event) => {
-    fetchData();
-  });
   const addToList = (event) => {
     /*If key press enter*/
     if (event.key == 'Enter') {
