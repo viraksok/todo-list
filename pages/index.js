@@ -11,15 +11,17 @@ export default function Home() {
   const [filteredTodo, setFilteredTodo] = useState([]);
   const [datatodo, setDatatodo] = useState([]);
 
-  async () => {
+  const fetchData = async () => {
     const response = await fetch('/api/todo');
 
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
     const todo_list = await response.json();
-    return setDatatodo(todo_list);
+    alert('fectch');
+    return setTodolist(todo_list);
   };
+  fetchData();
 
   const addToList = (event) => {
     /*If key press enter*/
