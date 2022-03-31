@@ -17,7 +17,7 @@ export default function Home() {
       throw new Error(`Error: ${response.status}`);
     }
     const todo_list = await response.json();
-    return setTodolist(...todo_list);
+    return setTodolist(todo_list);
   };
 
   const addToList = (event) => {
@@ -27,17 +27,13 @@ export default function Home() {
       if (todo !== '') {
         if (!isEdit) {
           if (!todolist.some((el) => el.todo == todo)) {
-            setTodolist(
-              [
-                ...todolist,
-                {
-                  id: todolist.length + 1,
-                  todo: todo,
-                  isCompleted: false,
-                },
-              ],
-              todo
-            );
+            todolist.push({
+              id: todolist.length + 1,
+              todo: todo,
+              isCompleted: false,
+            });
+
+            setTodolist(todolist);
             setTodo('');
           } else {
             alert('This input value alreay exist!');
@@ -88,7 +84,7 @@ export default function Home() {
   }, [todo, todolist]);
 
   return (
-    <div>
+    <div onLoad={fetchData()}>
       <h1>Todo List</h1>
       <input
         className={styles.input_padding}
