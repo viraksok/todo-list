@@ -19,12 +19,16 @@ export default function Home() {
     const todo_list = await response.json();
     if (isLoad) {
       setIsload(false);
-      return setTodolist(todo_list);
+      setTodolist(todo_list);
+      return setFilteredTodo(todo_list);
     } else {
       return [];
     }
   };
-  fetchData();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const addToList = (event) => {
     /*If key press enter*/
@@ -41,6 +45,14 @@ export default function Home() {
 
             setTodolist(todolist);
             setTodo('');
+            const requestOptions = {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(todo),
+            };
+            fetch('/api/todo', requestOptions)
+              .then((response) => response.json())
+              .then((data) => setTodolist(data));
           } else {
             alert('This input value alreay exist!');
           }

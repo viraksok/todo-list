@@ -23,7 +23,7 @@ export default function TodoActionHandlers({
             item.isCompleted ? styles.text_strike : styles.text_none_strike
           }
         >
-          {item.id} {item.todo}
+          {item.id}. {item.todo}
         </span>
         <span>
           {isShown && (

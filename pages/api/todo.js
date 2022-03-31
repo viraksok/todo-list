@@ -19,5 +19,18 @@ export default function handler(request, response) {
       createdAt: '2022-03-30',
     },
   ];
-  return response.status(200).json(data);
+
+  switch (request.method) {
+    case 'POST':
+      console.log(request);
+      return response.status(200).json();
+    case 'PUT':
+      console.log(response);
+      return response.status(200).json();
+    case 'DELETE':
+      console.log(response);
+      return response.status(200).json();
+    default:
+      return response.status(200).json(data);
+  }
 }
