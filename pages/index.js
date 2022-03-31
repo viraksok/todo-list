@@ -18,7 +18,6 @@ export default function Home() {
       throw new Error(`Error: ${response.status}`);
     }
     const todo_list = await response.json();
-    alert('fectch');
     return setTodolist(todo_list);
   };
   fetchData();
