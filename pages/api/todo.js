@@ -50,6 +50,7 @@ export default async function handler(request, response) {
       return response.status(200).json('Success');
     default:
       let todolist = await fetch(url + '.json');
-      return response.status(200).json(await todolist.json());
+      var resultget = await todolist.json();
+      return response.status(200).json(resultget == null ? data : resultget);
   }
 }

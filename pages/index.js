@@ -12,15 +12,17 @@ export default function Home() {
   const [isLoad, setIsload] = useState(true);
   const [getData, setGetData] = useState([]);
 
-  const fetchData = async () => {
-    await fetch('/api/todo')
+  const fetchData = () => {
+    fetch('/api/todo')
       .then((response) => response.json())
-      .then((data) => setGetData(data));
+      .then((data) => setTodolist(data));
     if (isLoad) {
+      console.log(getData);
       setIsload(false);
       return setFilteredTodo(getData);
     } else {
       setIsload(true);
+      alert('null');
       return [];
     }
   };
