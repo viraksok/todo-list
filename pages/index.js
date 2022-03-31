@@ -9,21 +9,25 @@ export default function Home() {
   const [isEdit, setIsEdit] = useState(false);
   const [isEditIndex, setIsEditIndex] = useState(0);
   const [filteredTodo, setFilteredTodo] = useState([]);
-  const [datatodo, setDatatodo] = useState([]);
+  const [isLoad, setIsload] = useState(true);
 
   const fetchData = async () => {
     const response = await fetch('api/todo');
-
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
     const todo_list = await response.json();
-    return setDatatodo(todo_list);
+    if (isLoad) {
+      return setTodolist(todo_list);
+    } else {
+      return [];
+    }
   };
   fetchData();
 
   const addToList = (event) => {
     /*If key press enter*/
+    setIsload(false);
     if (event.key == 'Enter') {
       /*Validate input if it's empty*/
       if (todo !== '') {
