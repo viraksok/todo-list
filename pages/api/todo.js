@@ -46,10 +46,9 @@ export default async function handler(request, response) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(request.body),
       };
-      let deletelist = await fetch(
-        url + '/${' + request.body + '}.json',
-        requestBodyDelete
-      );
+      let deletelist = await fetch(url + '/' + request.body + '.json', {
+        method: 'DELETE',
+      });
       return response.status(200).json('Success');
     default:
       let todolist = await fetch(url + '.json');

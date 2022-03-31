@@ -10,17 +10,16 @@ export default function Home() {
   const [isEditIndex, setIsEditIndex] = useState(0);
   const [filteredTodo, setFilteredTodo] = useState([]);
   const [isLoad, setIsload] = useState(true);
+  const [getData, IsGetData] = useState([]);
 
   const fetchData = async () => {
-    const response = await fetch('/api/todo');
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    const todo_list = await response.json();
+    await fetch('/api/todo')
+      .then((response) => response.json())
+      .then((data) => IsGetData(data));
     if (isLoad) {
       setIsload(false);
-      setTodolist(todo_list);
-      return setFilteredTodo(todo_list);
+      setTodolist(getData);
+      return setFilteredTodo(getData);
     } else {
       return [];
     }
@@ -85,8 +84,8 @@ export default function Home() {
   };
 
   const onClickRemove = (el) => {
-    //let removelist = todolist.filter((r) => r.id != el.id);
-    // setTodolist([...removelist]);
+    let removelist = todolist.filter((r) => r.id != el.id);
+    setTodolist([...removelist]);
     const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
@@ -94,7 +93,7 @@ export default function Home() {
     };
     fetch('/api/todo', requestOptions)
       .then((response) => response.json())
-      .then((data) => setTodolist(data));
+      .then((data) => setTodolist(...data));
   };
 
   /*on button complete click*/
