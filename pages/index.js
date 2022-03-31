@@ -22,7 +22,6 @@ export default function Home() {
       return setFilteredTodo(getData);
     } else {
       setIsload(true);
-      alert('null');
       return [];
     }
   };
@@ -129,7 +128,7 @@ export default function Home() {
   }, [todo, todolist]);
   return (
     <div>
-      <h1>Todo List</h1>
+      <h1 className={styles.container_magin}>TODO LIST</h1>
       <input
         className={styles.input_padding}
         placeholder="please input some text."
@@ -145,7 +144,10 @@ export default function Home() {
           onRemove={onClickRemove}
         />
       ))}
-      <p hidden={!(todolist.length !== 0 && filteredTodo.length === 0)}>
+      <p
+        className={styles.container_magin}
+        hidden={!(todolist.length !== 0 && filteredTodo.length === 0)}
+      >
         No result. Create a new one instead!
       </p>
       <br />

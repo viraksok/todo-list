@@ -28,9 +28,16 @@ export default function TodoActionHandlers({
         <span>
           {isShown && (
             <div>
-              <button onClick={() => onEdit(item)}>Edit</button>
-              <button onClick={() => onRemove(item)}>Remove</button>
-              <button onClick={() => onComplete(item)}>
+              <button className={styles.button} onClick={() => onEdit(item)}>
+                Edit
+              </button>
+              <button className={styles.button} onClick={() => onRemove(item)}>
+                Remove
+              </button>
+              <button
+                className={styles.button}
+                onClick={() => onComplete(item)}
+              >
                 {item.isCompleted ? 'Mark as Incomplete' : 'Mark as Complete'}
               </button>
             </div>
