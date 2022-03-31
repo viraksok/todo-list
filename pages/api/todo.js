@@ -1,4 +1,5 @@
 export default async function handler(request, response) {
+  const url = `https://todo-32f64-default-rtdb.asia-southeast1.firebasedatabase.app/todo`;
   const data = [
     {
       id: '1',
@@ -20,8 +21,6 @@ export default async function handler(request, response) {
     },
   ];
 
-  const url = `https://todo-32f64-default-rtdb.asia-southeast1.firebasedatabase.app/todo`;
-
   switch (request.method) {
     case 'POST':
       const requestPost = {
@@ -37,11 +36,14 @@ export default async function handler(request, response) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(request.body),
       };
-      console.log();
-      let updatelist = await fetch(url + '.json', requestUpdate);
+      let updatelist = await fetch(
+        url + '/' + request.body + '.json',
+        requestUpdate
+      );
+      console.log(url + '/' + request.body + '.json');
       return response.status(200).json('Success');
     case 'DELETE':
-      const requestBodyDelete = {
+      const requestDelete = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(request.body),

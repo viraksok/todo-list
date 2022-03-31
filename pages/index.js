@@ -45,12 +45,12 @@ export default function Home() {
             });
             setTodolist(todolist);
             setTodo('');
-            const requestOptions = {
+            const requestPost = {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(todolist),
             };
-            fetch('/api/todo', requestOptions)
+            fetch('/api/todo', requestPost)
               .then((response) => response.json())
               .then((data) => setTodolist(data));
           } else {
@@ -61,12 +61,12 @@ export default function Home() {
           todolist[isEditIndex].todo = todo;
           setTodo('');
 
-          const requestPutOptions = {
+          const requestPut = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(todolist),
+            body: JSON.stringify(todolist[isEditIndex]),
           };
-          fetch('/api/todo', requestPutOptions)
+          fetch('/api/todo', requestPut)
             .then((response) => response.json())
             .then((data) => setTodolist(data));
         }
@@ -86,12 +86,12 @@ export default function Home() {
   const onClickRemove = (el) => {
     let removelist = todolist.filter((r) => r.id != el.id);
     setTodolist([...removelist]);
-    const requestOptions = {
+    const requestDelete = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: el.id,
     };
-    fetch('/api/todo', requestOptions)
+    fetch('/api/todo', requestDelete)
       .then((response) => response.json())
       .then((data) => setTodolist(...data));
   };
