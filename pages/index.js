@@ -27,6 +27,7 @@ export default function Home() {
       if (todo !== '') {
         if (!isEdit) {
           if (!todolist.some((el) => el.todo == todo)) {
+            setTodolist(fetchData());
             todolist.push({
               id: todolist.length + 1,
               todo: todo,
