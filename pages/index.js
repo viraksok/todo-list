@@ -10,18 +10,17 @@ export default function Home() {
   const [isEditIndex, setIsEditIndex] = useState(0);
   const [filteredTodo, setFilteredTodo] = useState([]);
   const [isLoad, setIsload] = useState(true);
-  const [getData, IsGetData] = useState([]);
+  const [getData, setGetData] = useState([]);
 
   const fetchData = async () => {
     await fetch('/api/todo')
       .then((response) => response.json())
-      .then((data) => IsGetData(data))
-      .catch();
+      .then((data) => setGetData(data));
     if (isLoad) {
       setIsload(false);
       return setFilteredTodo(getData);
     } else {
-      alert('Null');
+      setIsload(true);
       return [];
     }
   };
