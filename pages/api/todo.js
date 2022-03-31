@@ -3,19 +3,19 @@ export default async function handler(request, response) {
   const data = [
     {
       id: '1',
-      todo: 'Honda PCX',
+      todo: 'Next JS',
       isCompleted: false,
       createdAt: Date(),
     },
     {
       id: '2',
-      todo: 'Honda Cub',
+      todo: 'React JS',
       isCompleted: false,
       createdAt: Date(),
     },
     {
       id: '3',
-      todo: 'Honda Click',
+      todo: 'Vue JS',
       isCompleted: false,
       createdAt: Date(),
     },
