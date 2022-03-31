@@ -21,6 +21,7 @@ export default function Home() {
       setIsload(false);
       return setFilteredTodo(getData);
     } else {
+      alert('Null');
       return [];
     }
   };
