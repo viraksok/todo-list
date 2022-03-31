@@ -1,4 +1,4 @@
-export default function handler(request, response) {
+export default async function handler(request, response) {
   const data = [
     {
       id: '1',
@@ -25,12 +25,24 @@ export default function handler(request, response) {
       console.log(request);
       return response.status(200).json();
     case 'PUT':
-      console.log(response);
-      return response.status(200).json();
+      const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: request.body,
+      };
+      let updatelist = await fetch(
+        `https://todo-32f64-default-rtdb.asia-southeast1.firebasedatabase.app/todo.json`,
+        requestOptions
+      );
+      console.log(updatelist);
+      return response.status(200).json('Success');
     case 'DELETE':
       console.log(response);
       return response.status(200).json();
     default:
-      return response.status(200).json(data);
+      let todolist = await fetch(
+        `https://todo-32f64-default-rtdb.asia-southeast1.firebasedatabase.app/todo.json`
+      );
+      return response.status(200).json(await todolist.json());
   }
 }

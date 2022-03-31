@@ -25,7 +25,6 @@ export default function Home() {
       return [];
     }
   };
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -41,14 +40,15 @@ export default function Home() {
               id: todolist.length + 1,
               todo: todo,
               isCompleted: false,
+              todolist,
             });
 
             setTodolist(todolist);
             setTodo('');
             const requestOptions = {
-              method: 'POST',
+              method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(todo),
+              body: JSON.stringify(todolist),
             };
             fetch('/api/todo', requestOptions)
               .then((response) => response.json())
