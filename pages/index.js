@@ -12,7 +12,7 @@ export default function Home() {
   const [datatodo, setDatatodo] = useState([]);
 
   const fetchData = async () => {
-    const response = await fetch('/api/todo');
+    const response = await fetch('api/todo');
 
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
