@@ -18,7 +18,6 @@ export default function Home() {
       .then((response) => response.json())
       .then((data) => setTodolist(data));
     if (isLoad) {
-      console.log(getData);
       setIsload(false);
       return setFilteredTodo(getData);
     } else {
