@@ -12,6 +12,11 @@ export default function TodoActionHandlers({
     setIsShown(isHover);
   };
 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
     <ul
       onMouseEnter={() => onMouseHoverEvent(true)}
@@ -23,7 +28,9 @@ export default function TodoActionHandlers({
             item.isCompleted ? styles.text_strike : styles.text_none_strike
           }
         >
-          <span>. {item.todo} </span>
+          <span onClick={() => onComplete(item)}>
+            . {item.todo} {formatDate(item.createAt)}
+          </span>
         </span>
         <span>
           {isShown && (

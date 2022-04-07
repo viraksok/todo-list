@@ -11,6 +11,8 @@ export default function Home() {
   const [filteredTodo, setFilteredTodo] = useState([]);
   const [isLoad, setIsload] = useState(true);
   const [getData, setGetData] = useState([]);
+  const [isExsit, GetExsit] = useState(false);
+  const [alertText, SetAlterText] = useState('');
 
   /*function load data*/
   const fetchData = () => {
@@ -19,7 +21,7 @@ export default function Home() {
       .then((data) => setTodolist(data));
     if (isLoad) {
       setIsload(false);
-      return setFilteredTodo(getData);
+      return setFilteredTodo(todolist);
     } else {
       setIsload(true);
       return [];
@@ -34,7 +36,7 @@ export default function Home() {
     /*If key press enter*/
     if (event.key == 'Enter') {
       /*Validate input if it's empty*/
-      if (todo !== '') {
+      if (todo.trim() !== '') {
         if (!isEdit) {
           if (
             !todolist.some((el) => el.todo.toLowerCase() == todo.toLowerCase())
@@ -56,9 +58,12 @@ export default function Home() {
               .then((response) => response.json())
               .then((data) => setTodolist(data));
           } else {
-            alert('This input value alreay exist!');
+            //alert('This input value alreay exist!');
+            GetExsit(true);
+            SetAlterText('This input value alreay exist!');
           }
         } else {
+          GetExsit(false);
           setIsEdit(false);
           todolist[isEditIndex].todo = todo;
           setTodo('');
@@ -73,7 +78,9 @@ export default function Home() {
             .then((data) => setTodolist(data));
         }
       } else {
-        alert('Please insert some text!');
+        //alert('Please insert some text!');
+        GetExsit(true);
+        SetAlterText('Please insert some text!');
       }
     }
   };
@@ -105,10 +112,16 @@ export default function Home() {
     let strikelist = todolist.map((taskTodolist) => {
       return el.isCompleted
         ? taskTodolist.id == el.id
-          ? { ...taskTodolist, isCompleted: false }
+          ? {
+              ...taskTodolist,
+              isCompleted: false,
+            }
           : { ...taskTodolist }
         : taskTodolist.id == el.id
-        ? { ...taskTodolist, isCompleted: true }
+        ? {
+            ...taskTodolist,
+            isCompleted: true,
+          }
         : { ...taskTodolist };
     });
     setTodolist([...strikelist]);
@@ -122,7 +135,13 @@ export default function Home() {
       .then((data) => setTodolist(data));
   };
 
+  const onCancel = (el) => {
+    setTodo('');
+    setIsEdit(false);
+  };
+
   useEffect(() => {
+    GetExsit(false);
     setFilteredTodo(
       todolist.filter((el) =>
         el.todo.toLowerCase().includes(todo.toLowerCase())
@@ -139,6 +158,10 @@ export default function Home() {
         value={todo}
         onChange={(even) => setTodo(even.target.value)}
       />
+      <button onClick={onCancel}>Cancel</button>
+      <p className={styles.container_magin} hidden={!isExsit}>
+        {alertText}
+      </p>
       {filteredTodo.map((item) => (
         <TodoActionHandlers
           item={item}
