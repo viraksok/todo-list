@@ -58,9 +58,8 @@ export default function Home() {
               .then((response) => response.json())
               .then((data) => setTodolist(data));
           } else {
-            //alert('This input value alreay exist!');
             GetExsit(true);
-            SetAlterText('This input value alreay exist!');
+            SetAlterText('This input value already exists!');
           }
         } else {
           GetExsit(false);
@@ -158,7 +157,9 @@ export default function Home() {
         value={todo}
         onChange={(even) => setTodo(even.target.value)}
       />
-      <button onClick={onCancel}>Cancel</button>
+      <button className={styles.btn_cancel} onClick={onCancel}>
+        Cancel
+      </button>
       <p className={styles.container_magin} hidden={!isExsit}>
         {alertText}
       </p>

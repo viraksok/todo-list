@@ -6,26 +6,25 @@ export default async function handler(request, response) {
       id: '0',
       todo: 'Next JS',
       isCompleted: false,
-      createdAt: new Date(),
+      createAt: new Date(),
     },
     {
       id: '1',
       todo: 'React JS',
       isCompleted: false,
-      createdAt: new Date(),
+      createAt: new Date(),
     },
     {
       id: '2',
       todo: 'Vue JS',
       isCompleted: false,
-      createdAt: new Date(),
+      createAt: new Date(),
     },
   ];
 
   switch (request.method) {
     /*Create new item*/
     case 'POST':
-      console.log('POST');
       const requestPost = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -37,7 +36,6 @@ export default async function handler(request, response) {
 
     /*Edit item*/
     case 'PUT':
-      console.log('PUT');
       const requestUpdate = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -60,7 +58,6 @@ export default async function handler(request, response) {
     default:
       let todolist = await fetch(url + '.json');
       var resultget = await todolist.json();
-      console.log(resultget);
       return response.status(200).json(resultget == null ? data : resultget);
   }
 }

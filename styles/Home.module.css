@@ -21,6 +21,9 @@
 .text_none_strike {
   text-decoration: none !important;
 }
+.btn_cancel {
+  margin-left: 0.5em;
+}
 
 @media (max-width: 600px) {
   .grid {
